@@ -8,23 +8,28 @@
                 <div class="card-body">
                     <div class="row">
                         <label for="filter">Filter by:</label>
-                        <div class="col-md-2" id="filter">
-                            <input type="text" class="form-control" placeholder="Search filter" />
+                        <div class="col-md-2"
+                             id="filter">
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Search filter" />
                         </div>
                     </div>
-                    <div class="row" *ngIf="filter">
+                    <div class="row"
+                         *ngIf="filter">
                         <div class="col-sm-12 col-md-3">
-                            <h6>Filtered by: </h6> 
+                            <h6>Filtered by: </h6>
                         </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table"
-                            *ngIf="products && products.length">
+                               *ngIf="products && products.length">
                             <thead>
                                 <tr>
                                     <th>
-                                        <button class="btn btn-group btn-group-sm btn-primary">
-                                            Show Image
+                                        <button (click)="toggleImage()"
+                                            class="btn btn-group btn-group-sm btn-primary">
+                                            {{ showImage ? 'Hide':'Show' }} Image
                                         </button>
                                     </th>
                                     <th>Product</th>
@@ -36,7 +41,13 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let product of products">
-                                    <td></td>
+                                    <td>
+                                        <img *ngIf="showImage"
+                                            [src]="product.imageUrl"
+                                            [title]="product.productName"
+                                            [style.width.px]="imageWidth"
+                                            [style.margin.px]="imageMargin">
+                                    </td>
                                     <td>{{ product.productName }}</td>
                                     <td>{{ product.productCode }}</td>
                                     <td>{{ product.releaseDate }}</td>
