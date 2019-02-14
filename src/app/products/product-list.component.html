@@ -12,13 +12,14 @@
                              id="filter">
                             <input type="text"
                                    class="form-control"
-                                   placeholder="Search filter" />
+                                   placeholder="Search filter"
+                                   [(ngModel)]="listFilter" />
                         </div>
                     </div>
                     <div class="row"
-                         *ngIf="filter">
+                         *ngIf="listFilter">
                         <div class="col-sm-12 col-md-3">
-                            <h6>Filtered by: </h6>
+                            <h6>Filtered by: {{listFilter}}</h6>
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -28,7 +29,7 @@
                                 <tr>
                                     <th>
                                         <button (click)="toggleImage()"
-                                            class="btn btn-group btn-group-sm btn-primary">
+                                                class="btn btn-group btn-group-sm btn-primary">
                                             {{ showImage ? 'Hide':'Show' }} Image
                                         </button>
                                     </th>
@@ -43,15 +44,15 @@
                                 <tr *ngFor="let product of products">
                                     <td>
                                         <img *ngIf="showImage"
-                                            [src]="product.imageUrl"
-                                            [title]="product.productName"
-                                            [style.width.px]="imageWidth"
-                                            [style.margin.px]="imageMargin">
+                                             [src]="product.imageUrl"
+                                             [title]="product.productName | uppercase"
+                                             [style.width.px]="imageWidth"
+                                             [style.margin.px]="imageMargin">
                                     </td>
                                     <td>{{ product.productName }}</td>
-                                    <td>{{ product.productCode }}</td>
+                                    <td>{{ product.productCode | lowercase }}</td>
                                     <td>{{ product.releaseDate }}</td>
-                                    <td>{{ product.price }}</td>
+                                    <td>{{ product.price | currency:'BRL':'symbol' }}</td>
                                     <td>{{ product.starRating }}</td>
                                 </tr>
                             </tbody>
