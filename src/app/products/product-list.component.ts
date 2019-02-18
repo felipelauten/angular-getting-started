@@ -7,12 +7,40 @@ import { IProduct } from './product';
     styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
+
+    constructor() {
+        this.filteredProducts = [];
+        this.listFilter = 'cat';
+    }
+
     pageTitle: string = 'Product List';
-    listFilter: string = 'cat';
     showImage: boolean = false;
 
     imageWidth: number = 50;
     imageMargin: number = 2;
+
+    _listFilter: string;
+    get listFilter(): string {
+        return this._listFilter;
+    }
+
+    set listFilter(listFilter: string) {
+        this._listFilter = listFilter;
+        this.filteredProducts = this.filterProducts(this._listFilter);
+    }
+
+    filterProducts(filter: string): IProduct[] {
+        if (filter == null) {
+            return this.products;
+        } else {
+            let lowerFilter = filter.toLowerCase();
+            return filter == null ? this.products : this.products.filter((product: IProduct) =>
+                product.productName.toLocaleLowerCase().indexOf(lowerFilter) != -1);
+        }
+    }
+
+    filteredProducts: IProduct[];
+
     products: IProduct[] = [
         {
             "productId": 1,
