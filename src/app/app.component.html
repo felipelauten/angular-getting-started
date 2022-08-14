@@ -1,4 +1,16 @@
-<!--The whole content below can be removed with the new code.-->
-<div style="text-align:center">
-  <pm-products></pm-products>
-</div>
+<mat-toolbar>
+  <button mat-icon-button class="example-icon" aria-label="Open Menu" (click)="toggleSidenav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>{{pageTitle}}</span>
+</mat-toolbar>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" [opened]="sidenavOpen" class="side-nav">
+    <div class="div-menu"><button mat-button class="menu-button" [routerLink]="['/welcome']">Home</button></div>
+    <div class="div-menu"><button mat-button class="menu-button" [routerLink]="['/products']">Product List</button></div>
+    <div class="div-menu"><button mat-button class="menu-button" [routerLink]="['/test']">Angular Material</button></div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
